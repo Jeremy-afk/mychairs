@@ -1,0 +1,19 @@
+TODO:
+Front office: 
+	-pages d'acceuils
+	-connexion à l'appli
+	-
+	
+Back-office:	
+
+Gestion des accès:
+
+Inventaires:
+
+Objets:
+
+Galeries:
+
+membres:
+
+	
