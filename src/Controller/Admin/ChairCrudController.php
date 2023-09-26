@@ -2,21 +2,21 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Stack;
+use App\Entity\Chair;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
-class StackCrudController extends AbstractCrudController
+class ChairCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Stack::class;
+        return Chair::class;
     }
 
     
-    public function configureFields(string $stack): iterable
+    public function configureFields(string $chair): iterable
     {
         return [
             IdField::new('id'),

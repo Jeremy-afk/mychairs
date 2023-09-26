@@ -17,13 +17,13 @@ class DashboardController extends AbstractDashboardController
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
+         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+         return $this->redirect($adminUrlGenerator->setController(StackCrudController::class)->generateUrl());
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
         //
         // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
+        //    return $this->redirect('...');
         // }
 
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
@@ -36,11 +36,14 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Mychairs');
+            
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Chair', 'fa fa-chair', Chair::class);
+        yield MenuItem::linkToCrud('Stack', 'fa fa-stack', Stack::class);
     }
+    
 }

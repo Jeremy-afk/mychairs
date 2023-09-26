@@ -25,6 +25,10 @@ class Stack
     #[ORM\OneToMany(mappedBy: 'relationToStack', targetEntity: Chair::class)]
     private Collection $relationToChair;
 
+    #[ORM\ManyToOne(inversedBy: 'OneToMany')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Member $member = null;
+
     public function __construct()
     {
         $this->relationToChair = new ArrayCollection();
@@ -59,32 +63,14 @@ class Stack
         return $this;
     }
 
-    /**
-     * @return Collection<int, Chair>
-     */
-    public function getRelationToChair(): Collection
+    public function getMember(): ?Member
     {
-        return $this->relationToChair;
+        return $this->member;
     }
 
-    public function addRelationToChair(Chair $relationToChair): static
+    public function setMember(?Member $member): static
     {
-        if (!$this->relationToChair->contains($relationToChair)) {
-            $this->relationToChair->add($relationToChair);
-            $relationToChair->setRelationToStack($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRelationToChair(Chair $relationToChair): static
-    {
-        if ($this->relationToChair->removeElement($relationToChair)) {
-            // set the owning side to null (unless already changed)
-            if ($relationToChair->getRelationToStack() === $this) {
-                $relationToChair->setRelationToStack(null);
-            }
-        }
+        $this->member = $member;
 
         return $this;
     }
