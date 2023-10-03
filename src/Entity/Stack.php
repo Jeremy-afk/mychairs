@@ -29,6 +29,9 @@ class Stack
     #[ORM\JoinColumn(nullable: false)]
     private ?Member $member = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
     public function __construct()
     {
         $this->relationToChair = new ArrayCollection();
@@ -39,6 +42,12 @@ class Stack
         return $this->id;
     }
 
+    public function setId(int $id): static
+    {
+        $this -> id = $id;
+        return $this;
+    }
+    
     public function isIsPublic(): ?bool
     {
         return $this->isPublic;
@@ -71,6 +80,18 @@ class Stack
     public function setMember(?Member $member): static
     {
         $this->member = $member;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }
