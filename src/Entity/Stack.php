@@ -22,19 +22,21 @@ class Stack
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\OneToMany(mappedBy: 'relationToStack', targetEntity: Chair::class)]
-    private Collection $relationToChair;
-
     #[ORM\ManyToOne(inversedBy: 'OneToMany')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Member $member = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\OneToMany(mappedBy: 'chairToStack', targetEntity: Chair::class)]
+    private Collection $chairsInStack;
+
+
     public function __construct()
     {
         $this->relationToChair = new ArrayCollection();
+        $this->chairsInStack = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,4 +97,35 @@ class Stack
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Chair>
+     */
+    public function getChairsInStack(): Collection
+    {
+        return $this->chairsInStack;
+    }
+
+    public function addChairsInStack(Chair $chairsInStack): static
+    {
+        if (!$this->chairsInStack->contains($chairsInStack)) {
+            $this->chairsInStack->add($chairsInStack);
+            $chairsInStack->setChairToStack($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChairsInStack(Chair $chairsInStack): static
+    {
+        if ($this->chairsInStack->removeElement($chairsInStack)) {
+            // set the owning side to null (unless already changed)
+            if ($chairsInStack->getChairToStack() === $this) {
+                $chairsInStack->setChairToStack(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

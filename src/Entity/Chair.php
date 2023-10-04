@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ChairRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,15 @@ class Chair
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
+
+    #[ORM\ManyToOne(inversedBy: 'chairsInStack')]
+    private ?Stack $chairToStack = null;
+
+    public function __construct()
+    {
+        $this->relationToStack = new ArrayCollection();
+        $this->chairToStacks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -99,5 +110,30 @@ class Chair
 
         return $this;
     }
+
+    public function getStack(): ?Stack
+    {
+        return $this->stack;
+    }
+
+    public function setStack(Stack $stack): static
+    {
+        $this->stack = $stack;
+
+        return $this;
+    }
+
+    public function getChairToStack(): ?Stack
+    {
+        return $this->chairToStack;
+    }
+
+    public function setChairToStack(?Stack $chairToStack): static
+    {
+        $this->chairToStack = $chairToStack;
+
+        return $this;
+    }
+
 
 }

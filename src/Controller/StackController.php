@@ -24,7 +24,11 @@ class StackController extends AbstractController
             <ul>';
         
         foreach ($stacks as $stack) {
-            $htmlContent .= '<li>' . $stack->getDescription() . '</li>';
+            $url = $this->generateUrl(
+                'stack_show',
+                ['id' => $stack->getId()] // Assurez-vous que votre entité Stack a une méthode getId() pour obtenir l'ID
+            );        
+            $htmlContent .= '<li><a href="' . $url . '">' . $stack->getName() . ' (' . $stack->getId() . ')</a></li>';
             // Assurez-vous d'adapter cette ligne en fonction des propriétés de votre classe Stack
         }
         
@@ -59,7 +63,7 @@ class StackController extends AbstractController
         
         // Ajoutez d'autres informations de votre Stack ici
 
-        $res .= '<p/><a href="' . $this->generateUrl('stack_index') . '">Back</a>';
+        //$res .= '<p/><a href="' . $this->generateUrl('stack_index') . '">Back</a>';
         $res .= '</body></html>'; // Fermez les balises HTML ici
 
         return new Response($res);
