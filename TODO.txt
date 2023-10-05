@@ -1,19 +1,6 @@
 TODO:
-Front office: 
-	-pages d'acceuils
-	-connexion à l'appli
-	-
-	
-Back-office:	
-
-Gestion des accès:
-
-Inventaires:
-
-Objets:
-
-Galeries:
-
-membres:
-
+Dans un futur proche voici ce qu'il y a à faire :
+-Travailler la mise en page avec html/twig/css
+-transformer les chaises dans les stacks en lien permettant de voir les champs de celle-ci. Comme lorsque l'on est dans /stack : on ferait /stack/idstack/idchaise. afin de faciliter la lecture.
+-Faire la partie backend avec easy admin
 	

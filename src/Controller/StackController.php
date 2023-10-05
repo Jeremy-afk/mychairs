@@ -60,6 +60,7 @@ class StackController extends AbstractController
         // Vous pouvez maintenant ajouter du contenu HTML à $res en fonction des propriétés de votre Stack
         $res .= '<h1>' . $stack->getName() . '</h1>'; // Remplacez getNom() par la méthode appropriée de votre Stack
         $res .= '<p>' . $stack->getDescription() . '</p>'; // Remplacez getDescription() par la méthode appropriée
+        $res .= '<p>' . $stack->isIsPublic() . " (1 public 0 privée)". '</p>'; 
         $chairs = $stack->getChairsInStack();
 
         foreach ($chairs as $chair) {
