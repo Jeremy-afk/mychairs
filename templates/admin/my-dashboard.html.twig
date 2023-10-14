@@ -1,0 +1,30 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}Admin Chair Page{% endblock %}
+{% block page_actions %}
+    <a class="btn btn-primary" 
+       href="{{ path('admin', {'crudAction': 'new',
+                               'crudControllerFqcn': 'App\Controller\Admin\StackCrudController'}) }}">
+     Add Stack</a>
+{% endblock %}
+
+{% block main %}
+    <table class="datagrid">
+        <thead>
+            <tr>
+                {% for stack in stacks %}
+                    <th>{{ stack.name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in 0..maxChairCount-1 %}
+                <tr>
+                    {% for stack in stacks %}
+                        <td>{{ stack.chairs[row].name|default('') }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
