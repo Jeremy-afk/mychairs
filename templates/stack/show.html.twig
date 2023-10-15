@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+
+{% block content_title %}Show Page{% endblock %}
+
+{% block body %}
+      <h1>Stack</h1>
+
+      {% dump stack %}
+
+      <table class="table">
+          <tbody>
+
+              <tr>
+                  <th>Membre</th>
+                  <td>{{ stack.Member }}</td>
+              </tr> 
+
+              <tr>
+                  <th>Description</th>
+                  <td>{{ stack.Description }}</td>
+              </tr>
+
+              <tr>
+                  <th>Visibility</th>
+                  {% if stack.IsPublic %}
+                    <td>Public</td>                    
+                  {% else %}
+                    <td>Private</td>   
+                  {% endif %}
+              </tr> 
+
+              <tr>
+                  <th>Id</th>
+                  <td>{{ stack.id }}</td>
+              </tr>
+
+              <tr>
+                {# ... #}
+              </tr>
+
+              <tr>
+                  <th>Chair</th>
+                  <td>
+                  <ul>
+                  {%  for chair in stack.getChairsInStack    %}
+                    <li>
+                        <a href="{{ path('chair_show', {'id': chair.id}) }}">{{ chair }}</a>
+                        <a href="{{ path('stack_show', {'id': chair.chairToStack.id }) }}">back to stack</a>
+                    </li>
+                  {% endfor %} {# stack.chairs #}
+                  </ul> 
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+{% endblock %}

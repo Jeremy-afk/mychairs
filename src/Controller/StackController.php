@@ -7,7 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Stack; 
+use App\Entity\Chair; 
+use App\Entity\Stack;
 
 class StackController extends AbstractController
 {
@@ -45,9 +46,18 @@ class StackController extends AbstractController
      *
      * @param Integer $id (note that the id must be an integer)
     */
+    
     #[Route('/stack/{id}', name: 'stack_show', requirements: ['id' => '\d+'])]
     public function show(EntityManagerInterface $doctrine, $id)
     {
+        $stackRepo = $doctrine->getRepository(Stack::class);
+        $stack = $stackRepo->find($id);
+        return $this->render('/stack/show.html.twig',
+            [ 'welcome' => "Bonne utilisation de la todo list",
+              'stack' => $stack]           
+
+        );
+        /*
         $stackRepo = $doctrine->getRepository(Stack::class);
         $stack = $stackRepo->find($id);
 
@@ -80,5 +90,7 @@ class StackController extends AbstractController
         $res .= '</body></html>'; // Fermez les balises HTML ici
 
         return new Response($res);
+        */
     }
+    
 }

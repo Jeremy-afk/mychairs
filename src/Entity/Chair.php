@@ -33,7 +33,11 @@ class Chair
 
     #[ORM\ManyToOne(inversedBy: 'chairsInStack')]
     private ?Stack $chairToStack = null;
-
+/*
+    #[ORM\ManyToOne(inversedBy: 'OneToMany')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Stack $stack = null;
+*/
     public function __construct()
     {
         $this->relationToStack = new ArrayCollection();
