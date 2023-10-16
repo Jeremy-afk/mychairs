@@ -24,6 +24,9 @@ class Member
     #[ORM\OneToMany(mappedBy: 'member', targetEntity: Stack::class, orphanRemoval: true)]
     private Collection $OneToMany;
 
+    #[ORM\ManyToOne(inversedBy: 'Creator')]
+    private ?Lounge $lounge = null;
+
     public function __construct()
     {
         $this->OneToMany = new ArrayCollection();
@@ -96,6 +99,18 @@ class Member
                 $oneToMany->setMember(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLounge(): ?Lounge
+    {
+        return $this->lounge;
+    }
+
+    public function setLounge(?Lounge $lounge): static
+    {
+        $this->lounge = $lounge;
 
         return $this;
     }

@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
+
 {% block content_title %}Show Page{% endblock %}
 
 {% block body %}
@@ -13,6 +14,9 @@
             {% for stack in stacks %}
                 <li>
                     <a href="{{path('stack_show', {'id': stack.id}) }}"> {{stack.name}}</a>
+                </li>
             {% endfor %}
+
+            </tbody>
 {% endblock %}
 

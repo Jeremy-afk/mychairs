@@ -1,0 +1,8 @@
+bootstrap_menu:
+  menus:
+    main:
+      items:
+        - route: 'app_stack'
+          label: 'Stack'
+        - route: 'app_chair'
+          label: 'Chair'

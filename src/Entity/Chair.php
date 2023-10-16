@@ -33,6 +33,9 @@ class Chair
 
     #[ORM\ManyToOne(inversedBy: 'chairsInStack')]
     private ?Stack $chairToStack = null;
+
+    #[ORM\ManyToMany(targetEntity: Lounge::class, mappedBy: 'manytomany')]
+    private Collection $lounges;
 /*
     #[ORM\ManyToOne(inversedBy: 'OneToMany')]getStack
 */
@@ -40,6 +43,7 @@ class Chair
     {
         $this->relationToStack = new ArrayCollection();
         $this->chairToStacks = new ArrayCollection();
+        $this->lounges = new ArrayCollection();
     }
 
     public function __toString()
@@ -138,6 +142,33 @@ class Chair
     public function setChairToStack(?Stack $chairToStack): static
     {
         $this->chairToStack = $chairToStack;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lounge>
+     */
+    public function getLounges(): Collection
+    {
+        return $this->lounges;
+    }
+
+    public function addLounge(Lounge $lounge): static
+    {
+        if (!$this->lounges->contains($lounge)) {
+            $this->lounges->add($lounge);
+            $lounge->addManytomany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLounge(Lounge $lounge): static
+    {
+        if ($this->lounges->removeElement($lounge)) {
+            $lounge->removeManytomany($this);
+        }
 
         return $this;
     }
