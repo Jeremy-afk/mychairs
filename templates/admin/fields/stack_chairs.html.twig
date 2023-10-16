@@ -1,0 +1,18 @@
+  <ul>
+{% for chair in field.value %}
+  {%- set url = ea_url()
+    .setController('App\\Controller\\Admin\\ChairCrudController')
+    .setAction('detail')
+    .setEntityId(chair.id)
+  -%}
+  <li>
+  	<a href="{{ url }}">
+        {{ chair }}
+  	</a>
+  </li>
+{% else %}
+</ul>  
+  <span class="badge badge-secondary">None</span>
+  <ul>
+{% endfor %}
+  </ul>

@@ -19,6 +19,9 @@ class StackController extends AbstractController
         $repository = $entityManager->getRepository(Stack::class);
         $stacks = $repository->findAll();
     
+        return $this->render('/stack/index.html.twig',
+            ['stacks' =>$stacks]);
+/*        
         // Générez le contenu HTML à partir de la liste des "Stacks"
         $htmlContent = '<html>
           <body>Liste des Stacks :
@@ -39,6 +42,7 @@ class StackController extends AbstractController
     
         // Retournez la réponse HTTP contenant le contenu HTML
         return new Response($htmlContent);
+*/       
     } 
 
     /*
@@ -53,8 +57,7 @@ class StackController extends AbstractController
         $stackRepo = $doctrine->getRepository(Stack::class);
         $stack = $stackRepo->find($id);
         return $this->render('/stack/show.html.twig',
-            [ 'welcome' => "Bonne utilisation de la todo list",
-              'stack' => $stack]           
+            [ 'stack' => $stack]           
 
         );
         /*

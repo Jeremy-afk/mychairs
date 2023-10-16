@@ -4,7 +4,7 @@
 {% block content_title %}Show Page{% endblock %}
 
 {% block body %}
-      <h1>Stack</h1>
+      <h1>{{stack.Name}}</h1>
 
       {% dump stack %}
 
@@ -22,18 +22,13 @@
               </tr>
 
               <tr>
-                  <th>Visibility</th>
+                  <th>Visibilité</th>
                   {% if stack.IsPublic %}
-                    <td>Public</td>                    
+                    <td>Publique</td>                    
                   {% else %}
-                    <td>Private</td>   
+                    <td>Privée</td>   
                   {% endif %}
               </tr> 
-
-              <tr>
-                  <th>Id</th>
-                  <td>{{ stack.id }}</td>
-              </tr>
 
               <tr>
                 {# ... #}
@@ -46,12 +41,17 @@
                   {%  for chair in stack.getChairsInStack    %}
                     <li>
                         <a href="{{ path('chair_show', {'id': chair.id}) }}">{{ chair }}</a>
-                        <a href="{{ path('stack_show', {'id': chair.chairToStack.id }) }}">back to stack</a>
+                        {#<a href="{{ path('stack_show', {'id': chair.chairToStack.id }) }}">back to stack</a>#}
                     </li>
                   {% endfor %} {# stack.chairs #}
                   </ul> 
                   </td>
               </tr>
+
+              <tr>
+                <a href=http://localhost:8000/stack/> retour à la liste des stacks </a>
+              </tr>
+
           </tbody>
       </table>
 {% endblock %}

@@ -4,15 +4,15 @@
 
 {% block body %}
 
-    <h1>Stack List</h1>
+    <h1>Chair List</h1>
 
-      {% dump stacks %}
+      {% dump chairs %}
 
       <table class="table">
           <tbody>
-            {% for stack in stacks %}
+            {% for chair in chairs %}
                 <li>
-                    <a href="{{path('stack_show', {'id': stack.id}) }}"> {{stack.name}}</a>
+                    <a href="{{path('chair_show', {'id': chair.id})}}"> {{chair.name}}</a>
             {% endfor %}
 {% endblock %}
 

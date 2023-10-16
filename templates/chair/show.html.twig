@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ChairController!{% endblock %}
+
+{% block content_title %}Show Page{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+      <h1>{{chair.Name}}</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+      {% dump chair %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/jeremy/CSC4101/projetchaise/mychairs/src/Controller/ChairController.php'|file_link(0) }}">src/Controller/ChairController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/jeremy/CSC4101/projetchaise/mychairs/templates/chair/index.html.twig'|file_link(0) }}">templates/chair/index.html.twig</a></code></li>
-    </ul>
-</div>
+      <table class="table">
+          <tbody>
+
+              <tr>
+                  <th>Description</th>
+                  <td>{{ chair.Description }}</td>
+              </tr>
+
+              <tr>
+                  <th>Rarity</th>
+                  <td>{{ chair.rarity }}</td>
+              </tr> 
+
+              <tr>
+                  <th>Number of Legs</th>
+                  <td>{{ chair.nbLegs }}</td>
+              </tr> 
+
+              <tr>
+                <a href="{{ path('stack_show', {'id': chair.getChairToStack.id }) }}"> Aller au stack</a>
+              </tr>
+
+          </tbody>
+      </table>
 {% endblock %}

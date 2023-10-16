@@ -1,0 +1,18 @@
+  <ul>
+{% for stack in field.value %}
+  {%- set url = ea_url()
+    .setController('App\\Controller\\Admin\\StackCrudController')
+    .setAction('detail')
+    .setEntityId(stack.id)
+  -%}
+  <li>
+  	<a href="{{ url }}">
+        {{ stack }}
+  	</a>
+  </li>
+{% else %}
+</ul>  
+  <span class="badge badge-secondary">None</span>
+  <ul>
+{% endfor %}
+  </ul>

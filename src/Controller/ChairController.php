@@ -13,11 +13,13 @@ use App\Entity\Stack;
 class ChairController extends AbstractController
 {
     #[Route('/chair', name: 'app_chair')]
-    public function index(): Response
+    public function index(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('chair/index.html.twig', [
-            'controller_name' => 'ChairController',
-        ]);
+        $repository = $entityManager->getRepository(Chair::class);
+        $chairs = $repository->findAll();
+    
+        return $this->render('/chair/index.html.twig',
+            ['chairs' =>$chairs]);
     }
 
     #[Route('/chair/{id}', name: 'chair_show', requirements: ['id' => '\d+'])]
@@ -26,8 +28,7 @@ class ChairController extends AbstractController
         $chairRepo = $doctrine->getRepository(Chair::class);
         $chair = $chairRepo->find($id);
         return $this->render('/chair/show.html.twig',
-            [ 'welcome' => "Bonne utilisation de la todo list",
-              'chair' => $chair]           
+            ['chair' => $chair]           
 
         );
     }
