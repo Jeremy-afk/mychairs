@@ -21,11 +21,11 @@ class Lounge
     #[ORM\Column]
     private ?bool $published = null;
 
-    #[ORM\OneToMany(mappedBy: 'lounge', targetEntity: Member::class)]
-    private Collection $Creator;
-
     #[ORM\ManyToMany(targetEntity: Chair::class, inversedBy: 'lounges')]
     private Collection $manytomany;
+
+    #[ORM\ManyToOne(inversedBy: 'lounges')]
+    private ?Member $creator = null;
 
     public function __construct()
     {
@@ -63,36 +63,6 @@ class Lounge
     }
 
     /**
-     * @return Collection<int, Member>
-     */
-    public function getCreator(): Collection
-    {
-        return $this->Creator;
-    }
-
-    public function addCreator(Member $creator): static
-    {
-        if (!$this->Creator->contains($creator)) {
-            $this->Creator->add($creator);
-            $creator->setLounge($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCreator(Member $creator): static
-    {
-        if ($this->Creator->removeElement($creator)) {
-            // set the owning side to null (unless already changed)
-            if ($creator->getLounge() === $this) {
-                $creator->setLounge(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Chair>
      */
     public function getManytomany(): Collection
@@ -112,6 +82,18 @@ class Lounge
     public function removeManytomany(Chair $manytomany): static
     {
         $this->manytomany->removeElement($manytomany);
+
+        return $this;
+    }
+
+    public function getCreator(): ?Member
+    {
+        return $this->creator;
+    }
+
+    public function setCreator(?Member $creator): static
+    {
+        $this->creator = $creator;
 
         return $this;
     }

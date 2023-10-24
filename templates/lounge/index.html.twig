@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lounge index{% endblock %}
+
+{% block body %}
+    <h1>Lounge index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Published</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lounge in lounges %}
+            <tr>
+                <td>{{ lounge.id }}</td>
+                <td>{{ lounge.description }}</td>
+                <td>{{ lounge.published ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_lounge_show', {'id': lounge.id}) }}">show</a>
+                    <a href="{{ path('app_lounge_edit', {'id': lounge.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_lounge_new') }}">Create new</a>
+{% endblock %}

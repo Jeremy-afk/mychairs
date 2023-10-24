@@ -2,7 +2,11 @@ bootstrap_menu:
   menus:
     main:
       items:
-        - route: 'app_stack'
-          label: 'Stack'
         - route: 'app_chair'
-          label: 'Chair'
+          label: 'Chaises'      
+        - route: 'app_stack'
+          label: 'Stacks'
+        - route: 'app_lounge_index'
+          label: 'Lounges'
+        - route: 'app_member'
+          label: 'Members'  

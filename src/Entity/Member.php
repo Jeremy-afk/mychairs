@@ -24,12 +24,13 @@ class Member
     #[ORM\OneToMany(mappedBy: 'member', targetEntity: Stack::class, orphanRemoval: true)]
     private Collection $OneToMany;
 
-    #[ORM\ManyToOne(inversedBy: 'Creator')]
-    private ?Lounge $lounge = null;
+    #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Lounge::class)]
+    private Collection $lounges;
 
     public function __construct()
     {
         $this->OneToMany = new ArrayCollection();
+        $this->lounges = new ArrayCollection();
     }
 
     public function __toString()
@@ -103,15 +104,34 @@ class Member
         return $this;
     }
 
-    public function getLounge(): ?Lounge
+    /**
+     * @return Collection<int, Lounge>
+     */
+    public function getLounges(): Collection
     {
-        return $this->lounge;
+        return $this->lounges;
     }
 
-    public function setLounge(?Lounge $lounge): static
+    public function addLounge(Lounge $lounge): static
     {
-        $this->lounge = $lounge;
+        if (!$this->lounges->contains($lounge)) {
+            $this->lounges->add($lounge);
+            $lounge->setCreator($this);
+        }
 
         return $this;
     }
+
+    public function removeLounge(Lounge $lounge): static
+    {
+        if ($this->lounges->removeElement($lounge)) {
+            // set the owning side to null (unless already changed)
+            if ($lounge->getCreator() === $this) {
+                $lounge->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

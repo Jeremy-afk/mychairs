@@ -25,7 +25,7 @@ class StackCrudController extends AbstractCrudController
         return [
             IdField::new('id'),
             TextField::new('name'),
-            TextField::new('member'),
+            AssociationField::new('member'),
             TextEditorField::new('description'),
             AssociationField::new('chairsInStack'),
             AssociationField::new('chairsInStack')

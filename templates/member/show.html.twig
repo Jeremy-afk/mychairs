@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block content_title %}Show Page{% endblock %}
+
+{% block body %}
+      <h1>{{member.nom}}</h1>
+
+      {% dump member %}
+
+      <table class="table">
+          <tbody>
+
+              <tr>
+                  <th>Description</th>
+                  <td>{{ member.Description }}</td>
+              </tr>
+        {% for stack in member.OneToMany %}
+        <li><a href="{{ path('app_stack', {'id' : stack.id}) }}">{{ stack }}</a></li>
+        <a href="{{ path('app_stack_new_with_member', {'id': member.id}) }}">add new stack</a>
+        {% endfor %}      
+
+          </tbody>
+      </table>
+{% endblock %}

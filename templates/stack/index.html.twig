@@ -5,18 +5,53 @@
 
 {% block body %}
 
-    <h1>Stack List</h1>
-
       {% dump stacks %}
 
-      <table class="table">
+        <header class="masthead">
+            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+                <div class="d-flex justify-content-center">
+                    <div class="text-center">
+                        <h1 class="mx-auto my-0 text-uppercase">Stack List</h1>
+                        <h2 class="text-white-50 mx-auto mt-2 mb-5">This is were you find your stacks</h2>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+<section class="projects-section bg-light" id="projects">
+                <!-- Project One Row-->
+        <table class="table">
           <tbody>
             {% for stack in stacks %}
-                <li>
-                    <a href="{{path('stack_show', {'id': stack.id}) }}"> {{stack.name}}</a>
-                </li>
+            <li>
+                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="bg-black text-center h-100 project">
+                                <div class="d-flex h-100">
+                                    <div class="project-text w-100 my-auto text-center text-lg-left">
+                                    <h4 class="text-white"> <a href="{{path('stack_show', {'id': stack.id}) }}"> {{stack.name}}</a> </h4>
+                                    <p class="mb-0 text-white-50">{{stack.Description}}</p>
+                                    <a href="{{ path('app_stack_edit', {'id': stack.id}) }}">edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </li>
+        </section>
             {% endfor %}
-
-            </tbody>
+                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="bg-black text-center h-100 project">
+                                <div class="d-flex h-50">
+                                    <div class="w-100 my-auto text-center text-lg-left">            
+                                        <a href="{{ path('app_stack_new') }}">Create new</a> 
+                                        </div>
+                                </div>
+                            </div>    
+                        </div>
+                </div>        
+            </tbody>           
 {% endblock %}
 

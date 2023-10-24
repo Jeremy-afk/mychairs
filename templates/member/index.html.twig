@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block content_title %}Show Page{% endblock %}
+
+{% block body %}
+
+    <h1>Member List</h1>
+
+      {% dump members %}
+
+      <table class="table">
+          <tbody>
+            {% for member in members %}
+                <li>
+                    <a href="{{path('member_show', {'id': member.id})}}"> {{member.nom}}</a>
+            {% endfor %}
+            </tbody>
+{% endblock %}

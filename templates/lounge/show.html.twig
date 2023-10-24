@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lounge{% endblock %}
+
+{% block body %}
+    <h1>Lounge</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lounge.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ lounge.description }}</td>
+            </tr>
+            <tr>
+                <th>Published</th>
+                <td>{{ lounge.published ? 'Yes' : 'No' }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+<h1>Chairs</h1>
+<ul>
+   {% for chair in lounge.manytomany %}
+   <li>
+     <a href="{{ path('app_lounge_chair_show', {'lounge_id': lounge.id, 'chair_id' : chair.id}) }}">{{ chair }}</a>
+
+      {% dump chair %}
+
+      <table class="table">
+          <tbody>
+
+              <tr>
+                  <th>Description</th>
+                  <td>{{ chair.Description }}</td>
+              </tr>
+
+              <tr>
+                  <th>Rarity</th>
+                  <td>{{ chair.rarity }}</td>
+              </tr> 
+
+              <tr>
+                  <th>Number of Legs</th>
+                  <td>{{ chair.nbLegs }}</td>
+              </tr> 
+
+              <tr>
+                <a href="{{ path('stack_show', {'id': chair.getChairToStack.id }) }}"> Aller au stack</a>
+              </tr>
+
+          </tbody>
+      </table>
+   </li>
+   {% endfor %}
+</ul>
+
+      
+
+<a href="{{ path('app_lounge_show', { 'id': lounge.id}) }}">back to lounge</a>
+
+
+    
+
+    <a href="{{ path('app_lounge_index') }}">back to list</a>
+
+    <a href="{{ path('app_lounge_edit', {'id': lounge.id}) }}">edit</a>
+
+    {{ include('lounge/_delete_form.html.twig') }}
+{% endblock %}
