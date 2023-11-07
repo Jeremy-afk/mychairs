@@ -2,7 +2,8 @@ Jeremy Lenoir
 Nomemclature :
 [Objet] : Chair
 [Inventaire] : Stack
-[Galerie] : (pas encore abordée)
+[Galerie] : Lounge
+
 
 Chair : 
 	-name
@@ -18,6 +19,11 @@ Stack :
 	-liste de chaises
 
 Explication : 
-Le thème de mon projet est "les chaises" ! Pour le moment la mise en page sur le site est sommaire c'est pourquoi quand vous regarderez les stacks vous allez voir les champs des chaises mis bout à bout. Les numéros apparaissant à côté des stacks sur /stack correspond à l'ID de du stack pour la suite du lien /stack/ID
+Pour voir une jolie mise en page je vous invite à aller sur /stack vous pourrez observer l'ensemble des stacks disponibles
+Pour tester l'authentification vous pouvez essayer email : aymeric@tryhard et mdp : tryhard
 
-Easy admin n'est pas en place je regarde ma base de donnée avec sqlitebrowser
+Pour acceder à Easy Admin taper /admin
+
+Normalement l'ensemble du site est accessible par le menu de navigation.
+
+La plupart des éléments optionnels n'ont pas été mis en place.
