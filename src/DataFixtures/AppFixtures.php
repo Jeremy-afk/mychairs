@@ -7,6 +7,8 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Chair;
 use App\Entity\Stack;
 use App\Entity\Member;
+use App\Entity\User;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class AppFixtures extends Fixture
 {
@@ -22,9 +24,9 @@ class AppFixtures extends Fixture
 
     private static function membersGenerator()
     {
-        yield[1, 'Aymeric Lacroix', "Aime les chaises réglables et si possible capable de se mettre à l'orizontable", self::aymeric];
-        yield[2, 'Louis Delyon', "Ma chaise idéale est un canapé", self::louis];
-        yield[3, 'Jeremy Le Beau Gosse', "Dans la vie je game, c'est pourquoi il me faut une chaise de gamer", self::jeremy];
+        yield[1, 'Aymeric Lacroix', "Aime les chaises réglables et si possible capable de se mettre à l'orizontable","aymeric@tryhard", self::aymeric];
+        yield[2, 'Louis Delyon', "Ma chaise idéale est un canapé","louis@rust", self::louis];
+        yield[3, 'Jeremy Le Beau Gosse', "Dans la vie je game, c'est pourquoi il me faut une chaise de gamer","jeremy@bg", self::jeremy];
 
     }
 
@@ -51,9 +53,13 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
 
-        foreach (self::membersGenerator() as [$id, $name, $description, $memberReference])
+        foreach (self::membersGenerator() as [$id, $name, $description,$useremail, $memberReference])
         {
             $member = new Member();
+            if ($useremail) {
+                $user = $manager->getRepository(User::class)->findOneByEmail($useremail);
+                $member->setUser($user);
+        }
             $member -> setId($id);
             $member -> setNom($name);
             $member -> setDescription($description);
@@ -104,5 +110,12 @@ class AppFixtures extends Fixture
 
         $manager->flush();
 
+    }
+
+    public function getDependencies()
+    {
+            return [
+                    UserFixtures::class,
+            ];
     }
 }
