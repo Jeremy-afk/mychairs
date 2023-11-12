@@ -29,28 +29,7 @@ class StackController extends AbstractController
     
         return $this->render('/stack/index.html.twig',
             ['stacks' =>$stacks]);
-/*        
-        // Générez le contenu HTML à partir de la liste des "Stacks"
-        $htmlContent = '<html>
-          <body>Liste des Stacks :
-            <ul>';
-        
-        foreach ($stacks as $stack) {
-            $url = $this->generateUrl(
-                'stack_show',
-                ['id' => $stack->getId()] // Assurez-vous que votre entité Stack a une méthode getId() pour obtenir l'ID
-            );        
-            $htmlContent .= '<li><a href="' . $url . '">' . $stack->getName() . ' (' . $stack->getId() . ')</a></li>';
-            // Assurez-vous d'adapter cette ligne en fonction des propriétés de votre classe Stack
-        }
-        
-        $htmlContent .= '</ul>
-          </body>
-        </html>';
-    
-        // Retournez la réponse HTTP contenant le contenu HTML
-        return new Response($htmlContent);
-*/       
+     
     } 
 
     /*
@@ -69,40 +48,7 @@ class StackController extends AbstractController
 
         );
     }
-        /*
-        $stackRepo = $doctrine->getRepository(Stack::class);
-        $stack = $stackRepo->find($id);
 
-        if (!$stack) {
-            throw $this->createNotFoundException('The Stack does not exist');
-        }
-
-        $res = '<html><body>'; // Ouvrez les balises HTML ici
-
-        // Vous pouvez maintenant ajouter du contenu HTML à $res en fonction des propriétés de votre Stack
-        $res .= '<h1>' . $stack->getName() . '</h1>'; // Remplacez getNom() par la méthode appropriée de votre Stack
-        $res .= '<p>' . $stack->getDescription() . '</p>'; // Remplacez getDescription() par la méthode appropriée
-        $res .= '<p>' . $stack->isIsPublic() . " (1 public 0 privée)". '</p>'; 
-        $chairs = $stack->getChairsInStack();
-
-        foreach ($chairs as $chair) {
-            $name = $chair -> getName();
-            $description = $chair -> getDescription();
-            $type = $chair -> getType();
-            $nbLegs = $chair -> getNbLegs();
-            $rarity = $chair -> getRarity();
-            
-            $res .= '<p>' ."Nom : ".  $name ." Description : ".  $description . " Type : ". $type . " Nombre de pieds : ". $nbLegs . " Rareté : ". $rarity . '</p>';
-        }
-        
-
-        // Ajoutez d'autres informations de votre Stack ici
-
-        //$res .= '<p/><a href="' . $this->generateUrl('stack_index') . '">Back</a>';
-        $res .= '</body></html>'; // Fermez les balises HTML ici
-
-        return new Response($res);
-        */
 
     #[Route('/new', name: 'app_stack_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

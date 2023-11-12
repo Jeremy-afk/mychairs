@@ -1,4 +1,5 @@
 Jeremy Lenoir
+Thème : les chaises (parce que j'aime bien m'asseoir)
 Nomemclature :
 [Objet] : Chair
 [Inventaire] : Stack
@@ -10,20 +11,42 @@ Chair :
 	-Description
 	-Type (tabouret/fauteuil/chaise...)
 	-Nombre de pieds
-	-rareté
+	-rareté (épic/légendaire/commun...)
+	-chairToStack (realation ManyToOne vers stack)
+	-manyToMany(relation ManyToMany vers Lounge)
 
 Stack :
 	-name
 	-Description
 	-visibilité (privée/publique)
 	-liste de chaises
+	-member 
+	-chairsInStack (OneToMany vers Chair)
+
+Lounge :
+	-description
+	-published
+	-manytomany (vers chaise)
+	-member (Many to One vers membre)
+
+Member :
+	-nom
+	-description
+	-OneToMany (vers stack)
+	-lounges (OneToMany vers Lounge)
+	-User (OneToOne vers User)
+
+User :
+	-email	
+	-roles
+	-password
+	-member (OneToOne ver Member)
 
 Explication : 
-Pour voir une jolie mise en page je vous invite à aller sur /stack vous pourrez observer l'ensemble des stacks disponibles
-Pour tester l'authentification vous pouvez essayer email : aymeric@tryhard et mdp : tryhard
+Pour la checklist de notation vous pouvez aller voir dans TODO où tout est détaillé.
+Pour se connecter en tant que user essayez : aymeric@tryhard et mdp : tryhard ou louis@rust et mdp : rust
+Pour se connecter en tant qu'admin (avec /admin) essayez : jeremy@bg et mdp : tryhard
 
-Pour acceder à Easy Admin taper /admin
 
-Normalement l'ensemble du site est accessible par le menu de navigation.
+Normalement l'ensemble du site est accessible par le menu de navigation, a l'exception d'Easy Admin où il faut taper /admin
 
-La plupart des éléments optionnels n'ont pas été mis en place.

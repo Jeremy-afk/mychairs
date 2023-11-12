@@ -1,6 +1,32 @@
-TODO:
-Dans un futur proche voici ce qu'il y a à faire :
--Travailler la mise en page avec html/twig/css
--transformer les chaises dans les stacks en lien permettant de voir les champs de celle-ci. Comme lorsque l'on est dans /stack : on ferait /stack/idstack/idchaise. afin de faciliter la lecture.
--Faire la partie backend avec easy admin
-	
+Ce fichier contient les étapes de la check-list d'avancement du projet retrouvable et où les retrouver.
+
+1. Utilisation de gabarits pour les pages de consultation du front-office suivantes (3 pts) :
+
+1.1 consultation d'un [objet] : 
+retrouvable sur http://localhost:8000/chair, le code est trouvable dans src/Controller/ChairController et le twig est dans templates/chair
+
+1.2 consultation de la liste des [objets] d'un [inventaire] : 
+Dans http://localhost:8000/stack cliquez sur un stack et vous retrouverez la liste des chaises présentes dans le stack.
+Le code est retrouvable dans /src/Controller/StackController et le twig dans templates/stack
+
+1.3 navigation d'un [inventaire] vers la consultation de ses [objets] :
+Depuis un stack cliquez sur l'objet et vous pourrez le consulter.
+
+
+2. Intégration d'une mise en forme CSS avec Bootstrap dans les gabarits Twig (1 pt) :
+Dans http://localhost:8000/stack le code css est dans templates/stack/index.html.twig
+
+3. Ajout de l'entité [galerie] au modèle des données et de l'association M-N avec [objet] (1 pt) :
+Les galeries sont trouvables dans http://localhost:8000/lounge et l'association M-N avec les objets est trouvable dans src/Entity/Lounge.php et s'appelle manytomany (quelle originalité je sais)
+
+4. Ajout de fonctions CRUD au front-office pour [inventaire] (1 pt) :
+Dans src/Controller/Admin/StackCrudController
+
+5. Contextualisation de la création d'un [objet] en fonction de l'[inventaire] (1 pt) :
+Le code est trouvable dans src/ChairController.php, la méthode est s'appelle newWithStack()
+
+6. Ajout des /Utilisateurs/ au modèle de données et du lien utilisateur - membre (1 pt) :
+Le code est dans src/Entity/User.php, on retrouve bien un OneToOne en utilisateur & membre
+
+7. Ajout de l'authentification (y compris documentation sur comptes et leurs rôles dans README) (1pt) :
+Comme demandé les logins sont dans le README et pour se connecter/déconnecter cliquez en haut à droite dans le site

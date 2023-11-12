@@ -15,5 +15,6 @@
                     <a href="{{path('chair_show', {'id': chair.id})}}"> {{chair.name}}</a>
             {% endfor %}
             </tbody>
+    <a href="{{ path('app_chair_new_with_stack') }}">Create new</a>
 {% endblock %}
 
